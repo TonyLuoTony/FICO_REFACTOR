@@ -36,7 +36,7 @@ class RiskEvaluationController extends BaseController
         } elseif (role('BI-风控-查看') || role('出房团队')) {
             $source = GeneralRentInformationCollection::where('user_id', '=', \CorpAuth::id());
         } else {
-            $this->error("您不是没有权限");
+            $this->error("您没有权限");
         }
 
         $search_arr = [];
@@ -106,7 +106,7 @@ class RiskEvaluationController extends BaseController
         $this->assertCan('BI_普租情报_详情');
 
         $id = $request->input('id', '');
-        if (empty($id)){
+        if (empty($id)) {
             $this->error("参数错误");
         }
 
