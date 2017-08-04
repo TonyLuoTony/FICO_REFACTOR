@@ -32,12 +32,12 @@ class PermissionByArea extends \BaseModel
     public static function list($name)
     {
         //name + area_id 在数据库层面是Unique的,所以可以用area_id做key
-        return self::whereName($name)->get()->keyBy('area_id');
+        return self::where('name', $name)->get()->keyBy('area_id');
     }
 
     public static function listOwner($name, $area_id)
     {
-        $obj = self::whereName($name)->whereAreaId($area_id)->first();
+        $obj = self::where('name', $name)->where('area_id', $area_id)->first();
         if (!$obj) {
             return [];
         } else {

@@ -51,7 +51,7 @@ function selectOpts(array $list, $placeholder_label = null)
  */
 function isProduction()
 {
-    return config('app.env') == 'production';
+    return true;
 }
 
 function isTesting()

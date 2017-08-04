@@ -127,10 +127,10 @@ class HousePricing extends \BaseModel
         $accountId = $staff->account->id ?? null;
 
         // 跨库关联,使用whereHas时候被当作同一个库
-        $departmentLeaderIds = \CorpUser::departmentLeaderIs($staff->id)->pluck('dingtalk_id')->toArray();
+        $departmentLeaderIds = \CorpUser::department('leader_id', $staff->id)->pluck('dingtalk_id')->toArray();
         $ownerIds = Account::whereIn('dingtalk_id', $departmentLeaderIds)->pluck('id')->toArray();
         if (!$this->allow('manger')) {
-            return $query->whereOwnerId($accountId)
+            return $query->where('owner_id', $accountId)
                 ->orWhereIn('owner_id', $ownerIds);
         } else {
             return $query->where('estimate_status', '!=', HousePricing::STATUS_草稿)
@@ -158,7 +158,7 @@ class HousePricing extends \BaseModel
         switch ($action) {
             case 'owner' :
                 return Account::findByStaff(\CorpAuth::user())->id === $this->owner_id
-                || $this->allow('leader');
+                    || $this->allow('leader');
             case 'manger' :
                 return can('评估收房方案');
             case 'leader' :
@@ -169,7 +169,7 @@ class HousePricing extends \BaseModel
                 return $this->allow('manger') || $this->allow('owner');
             case 'house_pricing_report' :
                 return $this->allow('house_pricing_editable') && in_array($this->estimate_status,
-                    [self::STATUS_草稿, self::STATUS_驳回]);
+                        [self::STATUS_草稿, self::STATUS_驳回]);
         }
     }
 

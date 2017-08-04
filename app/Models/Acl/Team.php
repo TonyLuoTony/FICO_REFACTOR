@@ -23,7 +23,7 @@ class Team extends \BaseModel
         return [
             'name' => 'required',
             'type' => 'required|in' . join(self::constants('type')),
-            'city_id' => 'required|in' . \Area::whereIsCity()->pluck('id')->toArray(),
+            'city_id' => 'required|in' . \Area::where('level', '城市')->pluck('id')->toArray(),
         ];
     }
 
@@ -34,8 +34,8 @@ class Team extends \BaseModel
     //  同城市 同类型只能有一个
     public function isDuplicate()
     {
-        return self::whereCityId($this->city_id)
-            ->whereType($this->type)
+        return self::where('city_id', $this->city_id)
+            ->where('type', $this->type)
             ->where('id', '!=', $this->id)
             ->exists();
     }
@@ -47,7 +47,7 @@ class Team extends \BaseModel
 
     public function city()
     {
-        return $this->belongsTo(\Area::class)->whereLevel(\Area::LEVEL_城市);
+        return $this->belongsTo(\Area::class)->where('level', \Area::LEVEL_城市);
     }
 
 }

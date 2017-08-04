@@ -134,8 +134,8 @@ class HouseStateRoom extends \BaseModel
     public function prepareEditorConfig()
     {
         // 获取房态配置
-        $houseStateTags = HouseStateNineTag::whereRoomType($this->room_type)
-            ->whereIsActive(HouseStateNineTag::STATUS_ACTIVITY)
+        $houseStateTags = HouseStateNineTag::where('room_type', $this->room_type)
+            ->where('is_active', HouseStateNineTag::STATUS_ACTIVITY)
             ->orderBy('id', 'desc')
             ->get();
 

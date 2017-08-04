@@ -72,23 +72,4 @@ class CorpAuth extends \Acl\AbstractAuth
     {
         return $staff ? self::id() === $staff->id : false;
     }
-
-    /**
-     * 根据当前平台生成后台登陆链接
-     *
-     * @return string
-     */
-    public static function loginUrl()
-    {
-        switch (true) {
-            case \UserAgent::isDingTalk():
-                return action('DingTalkController@getLogin');
-
-            case \UserAgent::isPC():
-                return action('DingTalkController@getLoginGateway');
-
-            default:
-                return action('QyWechatController@getLogin');
-        }
-    }
 }

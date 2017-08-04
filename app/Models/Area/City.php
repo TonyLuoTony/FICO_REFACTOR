@@ -12,13 +12,13 @@ class City extends AbstractArea
     public function getBlocksAttribute()
     {
         return Block::whereHas('district', function ($query) {
-            return $query->whereParentId($this->id);
+            return $query->where('parent_id', $this->id);
         })->get();
     }
 
     public static function list()
     {
-        return \Area::whereLevel(\Area::LEVEL_城市)->pluck('name', 'id')->all();
+        return \Area::where('level', \Area::LEVEL_城市)->pluck('name', 'id')->all();
     }
 
     public function children()

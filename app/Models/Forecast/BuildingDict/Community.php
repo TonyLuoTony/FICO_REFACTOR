@@ -38,7 +38,7 @@ class Community extends BaseDict
      */
     public function addBuilding($name)
     {
-        if ($building = ResourceBuilding::whereName($name)->whereCommunityId($this->id)->first()) {
+        if ($building = ResourceBuilding::whereName($name)->where('community_id', $this->id)->first()) {
             return $building;
         }
 

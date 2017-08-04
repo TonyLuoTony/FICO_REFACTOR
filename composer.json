@@ -30,6 +30,7 @@
             "app/Models",
             "app/Tools",
             "app/Libs",
+            "app/Jobs",
             "app/Exceptions"
         ],
         "files": [

@@ -53,7 +53,6 @@ abstract class AbstractAuth
             static::remember($user);
 
             \Session::put(static::SESSION_KEY, $id);
-            \AuditLog::log(\AuditLog::ACTION_LOGIN, static::LOG_TYPE, $id);
 
             static::afterLogin();
         }
@@ -68,8 +67,6 @@ abstract class AbstractAuth
 
         $id = \Session::get(static::SESSION_KEY) ?: 0;
         \Session::forget(static::SESSION_KEY);
-
-        \AuditLog::log(\AuditLog::ACTION_LOGOUT, static::LOG_TYPE, $id);
 
         static::afterLogout();
     }
