@@ -103,17 +103,23 @@ class RiskEvaluationController extends BaseController
             compact('source', 'count', 'search_arr', 'floor_list', 'cityList', 'blockList'));
     }
 
-    public function getDetail($id)
+    public function getDetail(Request $request)
     {
-//        $this->assertCan('BI_普租情报_详情');
-        if (role('BI-风控-评估师')) {
-            $info_res = GeneralRentInformationCollection::where('id', '=', $id)->first();
-        } elseif (role('BI-风控-查看') || role('出房团队')) {
-            $info_res = GeneralRentInformationCollection::where('id', '=', $id)->where('user_id', '=',
-                \CorpAuth::id())->first();
-        } else {
-            $this->error("您没有权限");
+
+        $id = $request->input('id', '');
+        if (empty($id)){
+            $this->error("参数错误");
         }
+//        $this->assertCan('BI_普租情报_详情');
+//        if (role('BI-风控-评估师')) {
+//            $info_res = GeneralRentInformationCollection::where('id', '=', $id)->first();
+//        } elseif (role('BI-风控-查看') || role('出房团队')) {
+//            $info_res = GeneralRentInformationCollection::where('id', '=', $id)->where('user_id', '=',
+//                \CorpAuth::id())->first();
+//        } else {
+//            $this->error("您没有权限");
+//        }
+        $info_res = GeneralRentInformationCollection::where('id', '=', $id)->first();
 
         $info_res = GeneralRentInformationCollection::where('id', '=', $id)->first();
         $logs = FicoLog::where(['related_doc_id' => $id, 'related_doc_type' => '普租情报操作日志'])->get();
@@ -132,7 +138,7 @@ class RiskEvaluationController extends BaseController
     }
 
     // 入库操作
-    public function postInputInfo(Request $request)
+    public function anyInputInfo(Request $request)
     {
         $this->assertCan('BI_普租情报_审核');
 

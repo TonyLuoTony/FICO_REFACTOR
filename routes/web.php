@@ -30,6 +30,8 @@ Route::group(['prefix'=>'admin','middleware'=>'check_login'], function (){
        Route::get('detail','Admin\BI\RiskEvaluationController@getDetail');
        Route::any('block-words','Admin\BI\RiskEvaluationController@anyBlockWords');
        Route::any('query-xiao-qu','Admin\BI\RiskEvaluationController@anyQueryXiaoQu');
+       Route::any('input-info','Admin\BI\RiskEvaluationController@anyInputInfo');
+       Route::any('cancle-info','Admin\BI\RiskEvaluationController@anyCancleInfo');
    });
 
 });

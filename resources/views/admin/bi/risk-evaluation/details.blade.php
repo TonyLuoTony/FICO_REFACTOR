@@ -111,7 +111,7 @@
     <div class="col-lg-9" style="margin-left: -15px">
         <div class="ibox float-e-margins">
             <div class="ibox-content">
-                    {!! Form::open(['url' => action('Admin\BI\RiskEvaluationController@postInputInfo'),'id'=>'info_form','method' => 'post','class'=>'form-horizontal']) !!}
+                    {!! Form::open(['url' => action('Admin\BI\RiskEvaluationController@anyInputInfo'),'id'=>'info_form','method' => 'post','class'=>'form-horizontal']) !!}
                     <div class="form-group">
                         <label class="col-sm-2 control-label">情报价格:</label>
                             <span class="col-sm-1 control-label" style="text-align: left;">{{$info_res->sale_price}}</span>

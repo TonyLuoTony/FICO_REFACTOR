@@ -21,7 +21,7 @@
     @css('css/admin.css')
     @js('bower/jquery/dist/jquery.min.js')
     {!! Rapyd::styles() !!}
-    @include('lego::styles')
+    {{--@include('lego::styles')--}}
     @yield('meta')
 
     @if( isProduction() )
@@ -209,7 +209,7 @@
 @js('inspinia/js/plugins/jasny/jasny-bootstrap.min.js')
 @js('inspinia/js/inspinia.js')
 @include('widget.rapyd-scripts')
-@include('lego::scripts')
+{{--@include('lego::scripts')--}}
 <script>
     $(document).ready(function () {
         for (var i in _defer) {
@@ -222,5 +222,6 @@
     //所有列表上的编辑按钮默认新窗口打开。
     $('a[href*="?modify="]').attr('target', '_blank');
 </script>
+@yield('boot-scripts')
 </body>
 </html>

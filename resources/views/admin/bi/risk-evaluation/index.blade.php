@@ -1,14 +1,5 @@
 @extends('admin.index')
 
-@section('meta')
-    @css('css/plugins/datapicker/datepicker3.css')
-    @css('css/plugins/daterangepicker/daterangepicker-bs3.css')
-    @js('js/plugins/datapicker/bootstrap-datepicker.js')
-    @js('js/plugins/datapicker/bootstrap-datepicker.zh-CN.js')
-    @js('js/plugins/daterangepicker/daterangepicker.js')
-    @js('js/plugins/fullcalendar/moment.min.js')
-    @js('js/keyword_search/keyword.js')
-@endsection
 
 @section('content')
     <div class="col-lg-12" style="margin-left: -15px">
@@ -133,7 +124,7 @@
                                 <td>{{$s_val->check_status}}</td>
                                 <td>
                                     {{link_to_blank(action('\App\Http\Controllers\Admin\BI\RiskEvaluationController@getDetail',
-        $s_val->id),$s_val->city . '-' . $s_val->block . '-' . $s_val->xiaoqu_name)}}
+        ['id'=>$s_val->id]),$s_val->city . '-' . $s_val->block . '-' . $s_val->xiaoqu_name)}}
                                 </td>
                                 <td>{{$s_val->building_code}}</td>
                                 <td>{{$floor_list[$s_val->floor]}}</td>
@@ -207,3 +198,12 @@
     
 @endsection
 
+@section('boot-scripts')
+    @css('css/plugins/datapicker/datepicker3.css')
+    @css('css/plugins/daterangepicker/daterangepicker-bs3.css')
+    @js('js/plugins/datapicker/bootstrap-datepicker.js')
+    @js('js/plugins/datapicker/bootstrap-datepicker.zh-CN.js')
+    @js('js/plugins/daterangepicker/daterangepicker.js')
+    @js('js/plugins/fullcalendar/moment.min.js')
+    @js('js/keyword_search/keyword.js')
+@endsection
