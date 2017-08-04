@@ -748,7 +748,7 @@ class HouseResource extends \BaseModel implements IS
                 continue;
             }
 
-            $xq = Xiaoqu::whereType(Xiaoqu::TYPE_重点)->whereName($row[0])->first();
+            $xq = Xiaoqu::where('type', Xiaoqu::TYPE_重点)->where('name', $row[0])->first();
             if (is_null($xq)) {
                 $appendRow($row, "非重点小区");
                 continue;

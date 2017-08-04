@@ -28,9 +28,7 @@ class CorpAuth extends \Acl\AbstractAuth
     protected static function afterLogin()
     {
         $staff = self::user();
-
-        $staff->onLogin();
-
+        
         //Session中保存用户名,方便Debug
         Session::put(self::SESSION_KEY_NAME, $staff->name);
     }
