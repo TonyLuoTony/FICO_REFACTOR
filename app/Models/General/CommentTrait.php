@@ -32,6 +32,6 @@ trait CommentTrait
      */
     public function lastComment()
     {
-        return $this->hasOne(Comment::class,'data_id')->whereTableName($this->getTable())->latest();
+        return $this->hasOne(Comment::class, 'data_id')->where('table_name', $this->getTable())->latest();
     }
 }

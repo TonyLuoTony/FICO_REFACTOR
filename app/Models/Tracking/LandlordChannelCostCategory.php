@@ -43,9 +43,9 @@ class LandlordChannelCostCategory extends \BaseModel implements USEABLE
     {
         $old = $landlord->resource->record_old_landlord;
         return LandlordChannelCostCategory::whereChannelName($old ? '业主' : $landlord->resource->record_external_user->job)
-            ->whereCityId($landlord->xiaoqu->block_relation->district->city->id)
+            ->where('city_id', $landlord->xiaoqu->block_relation->district->city->id)
             ->where('effective_at', '>=', Carbon::now())
-            ->whereStatus(self::USEABLE_启用)
+            ->where('status', self::USEABLE_启用)
             ->get()
             ->keyBy('id')
             ->map(function ($cate) {

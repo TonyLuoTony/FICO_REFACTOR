@@ -27,8 +27,8 @@ trait HistoryTrait
             return null;
         }
 
-        $histories = History::whereTableName($this->getTable())
-            ->whereDataId($this->getKey())
+        $histories = History::where('table_name', $this->getTable())
+            ->where('data_id', $this->getKey())
             ->where('created_at', '>=', $datetime)
             ->orderBy('id', 'desc')
             ->get();

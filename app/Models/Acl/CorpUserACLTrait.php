@@ -61,7 +61,7 @@ trait CorpUserACLTrait
             return true;
         }
 
-        $perm = Permission::whereKey($permissionName)->first();
+        $perm = Permission::where('key', $permissionName)->first();
         if (!$perm) {
             if (isProduction()) {
                 $this->noticeDev("[WARNING] Permission: {$permissionName} is not configured yet.");
@@ -69,8 +69,8 @@ trait CorpUserACLTrait
             return false;
         }
 
-        $permRoles = PermissionRole::wherePermissionId($perm->id)->pluck('role_id')->toArray();
-        $userRoles = CorpUserRole::whereCorpUserId($this->id)->pluck('role_id')->toArray();
+        $permRoles = PermissionRole::where('permission_id', $perm->id)->pluck('role_id')->toArray();
+        $userRoles = CorpUserRole::where('corp_user_id', $this->id)->pluck('role_id')->toArray();
 
         return array_intersect($permRoles, $userRoles) ? true : false;
     }
@@ -101,7 +101,7 @@ trait CorpUserACLTrait
             return false;
         }
 
-        return CorpUserRole::whereRoleId($perm->meta[$area->id]['role_id'])->whereCorpUserId($this->id)->exists();
+        return CorpUserRole::where('role_id', $perm->meta[$area->id]['role_id'])->where('corp_user_id', $this->id)->exists();
     }
 
     /**
@@ -117,7 +117,7 @@ trait CorpUserACLTrait
             return true;
         }
 
-        $role = Role::whereTitle($roleName)->first();
+        $role = Role::where('title', $roleName)->first();
 
         if (!$role) {
             if (isProduction()) {
@@ -126,7 +126,7 @@ trait CorpUserACLTrait
             return false;
         }
 
-        return CorpUserRole::whereCorpUserId($this->id)->whereRoleId($role->id)->exists();
+        return CorpUserRole::where('corp_user_id', $this->id)->where('role_id', $role->id)->exists();
     }
 
     private function noticeDev($subject)

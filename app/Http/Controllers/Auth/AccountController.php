@@ -6,6 +6,7 @@ use App\Models\CorpUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use AdminMenu;
 
 class AccountController extends Controller
 {
@@ -50,6 +51,12 @@ class AccountController extends Controller
 
     public function payment()
     {
+        $menus = (new AdminMenu())->visibleLinks();
+        echo '<pre>';
+        print_r($menus);
+        echo '</pre>';
+        exit;
+
         echo 'payment';
     }
 

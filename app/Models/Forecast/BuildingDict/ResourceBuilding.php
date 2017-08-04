@@ -46,7 +46,7 @@ class ResourceBuilding extends BaseDict
      */
     public function addUnit($name)
     {
-        if ($unit = ResourceUnit::whereName($name)->whereBuildingId($this->id)->first()) {
+        if ($unit = ResourceUnit::whereName($name)->where('building_id', $this->id)->first()) {
             return $unit;
         }
 

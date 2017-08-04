@@ -1,9 +1,7 @@
 <?php namespace App\Http\Controllers\Api;
 
-use App\Models\CorpUser;
 Use Illuminate\Encryption\Encrypter;
-use Illuminate\Support\Facades\Session;
-use Psy\Exception\ErrorException;
+use Illuminate\Support\Facades\Redis;
 
 class JumpController extends BaseApiController
 {
@@ -23,15 +21,15 @@ class JumpController extends BaseApiController
 
             if (time() - $dateTime <= 180) {
 
-                Session::setId($session_id);
-                Session::start();
+                $session_info = Redis::get("l5:" . $session_id);
+                $session_info = @unserialize(@unserialize($session_info));
 
-                $uid = Session::get("login_corp_user");
+                $uid = $session_info['login_corp_user'];
 
-                Session::put('corp_user', CorpUser::find($uid));
-                Session::put('login_corp_user', $uid);
+                //同步登陆
+                \CorpAuth::login($uid);
 
-                return redirect($url);
+                return redirect("admin/payment");
 
             } else {
                 abort('404', '登陆超时');

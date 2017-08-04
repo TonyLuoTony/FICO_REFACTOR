@@ -417,16 +417,16 @@ class DingTalk
 
             $staffs = $this->listDepartmentStaffs($department['id']);
             foreach ($staffs as $staff) {
-                if (!$staff = CorpUser::whereDingtalkId($staff['userid'])->first()) {
+                if (!$staff = CorpUser::where('dingtalk_id', $staff['userid'])->first()) {
                     continue;
                 }
 
-                if (!$dep = CorpDepartment::whereDingtalkId($department['id'])->first()) {
+                if (!$dep = CorpDepartment::where('dingtalk_id', $department['id'])->first()) {
                     continue;
                 }
 
-                $relation = CorpUserDepartment::whereStaffId($staff->id)
-                    ->whereDepartmentId($dep->id)
+                $relation = CorpUserDepartment::where('staff_id', $staff->id)
+                    ->where('department_id', $dep->id)
                     ->first();
                 if ($relation) {
                     $relation->touch();

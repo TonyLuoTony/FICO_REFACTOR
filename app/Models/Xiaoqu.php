@@ -158,12 +158,12 @@ class Xiaoqu extends BaseModel
         }
 
         //  保存时根据block更新subway_id
-        if ($this->isDirty('block') && $subway = \Subway::whereCity($this->city)->whereName($this->block)->first()) {
+        if ($this->isDirty('block') && $subway = \Subway::where('city', $this->city)->where('name', $this->block)->first()) {
             $this->subway_id = $subway->id;
         }
 
         // 将lng_lat拆成了两个字段
-        if(strpos($this->lng_lat, ',')) {
+        if (strpos($this->lng_lat, ',')) {
             $lngLat = explode(',', $this->lng_lat);
             $this->longitude = $lngLat[0];
             $this->latitude = $lngLat[1];
@@ -176,7 +176,7 @@ class Xiaoqu extends BaseModel
     {
         if ($city_name) {
             //此处还有不一致,回头再改吧,老地方还有几个地方用,先不动了.
-            if (!$districts = \Area::whereName($city_name)->first()) {
+            if (!$districts = \Area::where('name', $city_name)->first()) {
                 return [];
             }
             $districts = $districts->children->pluck('id')->toArray();
@@ -184,7 +184,7 @@ class Xiaoqu extends BaseModel
             return \Area::whereIn('parent_id', $districts)->pluck('name')->toArray();
         } else {
             $list = [];
-            foreach (\Area::whereLevel(\Area::LEVEL_商圈)->get() as $block) {
+            foreach (\Area::where('level', \Area::LEVEL_商圈)->get() as $block) {
                 $list[$block->id] = ($block->city()->name ?? null) . '-' . $block->name;
             }
 
@@ -194,14 +194,14 @@ class Xiaoqu extends BaseModel
 
     public static function listDistrict($city = \Area::CITY_北京市)
     {
-        $area = \Area::whereName($city)->first();
+        $area = \Area::where('name', $city)->first();
 
         return $area ? $area->children()->get(['name'])->pluck('name')->toArray() : [];
     }
 
     public static function getAutoCompleteResult($keyword)
     {
-        return Xiaoqu::whereType(\Xiaoqu::TYPE_重点)
+        return Xiaoqu::where('type', \Xiaoqu::TYPE_重点)
             ->where(function ($query) use ($keyword) {
                 $pattern = "%{$keyword}%";
                 /** @var \Xiaoqu $query */
@@ -237,7 +237,7 @@ class Xiaoqu extends BaseModel
                 ->orHas($relation, '=', 0)
                 ->orWhereHas($relation, function ($query) use ($city) {
                     /** @var Area $query */
-                    $query->whereName($city);
+                    $query->where('name', $city);
                 });
         });
     }

@@ -99,8 +99,8 @@ class Area extends BaseModel
      */
     public function area_mapping($source)
     {
-        return \Cooperation\AreaMapping::whereAreaId($this->id)
-            ->whereSource($source)
+        return \Cooperation\AreaMapping::where('area_id', $this->id)
+            ->where('source', $source)
             ->first();
     }
 
@@ -132,14 +132,14 @@ class Area extends BaseModel
 
     public function scopeWhereIsCity($query)
     {
-        return $query->whereLevel(self::LEVEL_城市);
+        return $query->where('level', self::LEVEL_城市);
     }
 
     public static function getBlockAutoComplete($keyword, $currentCity)
     {
-        return \Area::whereLevel(self::LEVEL_商圈)
+        return \Area::where('level', self::LEVEL_商圈)
             ->whereHas('parent.parent', function ($query) use ($currentCity) {
-                return $query->whereName($currentCity);
+                return $query->where('name', $currentCity);
             })
             ->where(function ($query) use ($keyword) {
                 $pattern = "%{$keyword}%";
