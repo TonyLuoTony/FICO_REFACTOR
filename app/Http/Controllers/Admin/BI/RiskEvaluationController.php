@@ -31,8 +31,6 @@ class RiskEvaluationController extends BaseController
         $check_time_lower = $request->input('check_time_lower', '');
         $check_time_upper = $request->input('check_time_upper', '');
 
-        //$source = GeneralRentInformationCollection::where('id', '>', 0);
-//        $source = GeneralRentInformationCollection::where('id', '>', 0);
         if (role('BI-风控-评估师')) {
             $source = GeneralRentInformationCollection::where('id', '>', 0);
         } elseif (role('BI-风控-查看') || role('出房团队')) {
@@ -105,12 +103,13 @@ class RiskEvaluationController extends BaseController
 
     public function getDetail(Request $request)
     {
+        $this->assertCan('BI_普租情报_详情');
 
         $id = $request->input('id', '');
         if (empty($id)){
             $this->error("参数错误");
         }
-        $this->assertCan('BI_普租情报_详情');
+
         if (role('BI-风控-评估师')) {
             $info_res = GeneralRentInformationCollection::where('id', '=', $id)->first();
         } elseif (role('BI-风控-查看') || role('出房团队')) {

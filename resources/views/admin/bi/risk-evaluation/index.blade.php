@@ -1,6 +1,5 @@
 @extends('admin.index')
 
-
 @section('content')
     <div class="col-lg-12" style="margin-left: -15px">
         <div class="ibox float-e-margins">
