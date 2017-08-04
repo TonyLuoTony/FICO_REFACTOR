@@ -99,9 +99,9 @@ class HouseResourceUser extends BaseCooperator
     {
         switch ($val) {
             case self::TYPE_信息渠道:
-                return $query->whereIsRecorder(true);
+                return $query->where('is_recorder', true);
             case self::TYPE_收房渠道:
-                return $query->whereIsDealer(true);
+                return $query->where('is_dealer', true);
             default:
                 return $query;
         }

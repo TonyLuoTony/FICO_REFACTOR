@@ -37,10 +37,6 @@ abstract class AbstractAuth
             static::remember(static::findUser($uid));
         }
 
-        if (static::current()) {
-            static::onVisit();
-        }
-
         return static::current();
     }
 

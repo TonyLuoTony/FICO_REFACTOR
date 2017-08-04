@@ -1,4 +1,5 @@
 <?php
+
 use Acl\Role;
 //use App\Events\Internal\CorpJoined;
 use Tracking\HouseResourceUser;
@@ -275,7 +276,7 @@ class CorpUser extends BaseModel implements \Constants\IS
      */
     public function scopeActive($query)
     {
-        return $query->whereStatus(self::STATUS_ACTIVE);
+        return $query->where('status', self::STATUS_ACTIVE);
     }
 
     /**

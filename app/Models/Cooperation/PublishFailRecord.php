@@ -17,7 +17,7 @@ class PublishFailRecord extends \BaseModel
 
     public static function recordPublish($roomId, $source)
     {
-        $record = self::whereRoomId($roomId)->whereSource($source)->first();
+        $record = self::where('room_id', $roomId)->where('source', $source)->first();
         if ($record) {
             $record->fail_num++;
         } else {
@@ -31,7 +31,7 @@ class PublishFailRecord extends \BaseModel
 
     public static function clearRecord($roomId, $source)
     {
-        $record = self::whereRoomId($roomId)->whereSource($source)->first();
+        $record = self::where('room_id', $roomId)->where('source', $source)->first();
         if ($record) {
             $record->fail_num = 0;
             $record->saveOrError();
