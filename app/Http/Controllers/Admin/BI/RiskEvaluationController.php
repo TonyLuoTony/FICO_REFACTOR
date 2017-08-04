@@ -106,7 +106,7 @@ class RiskEvaluationController extends BaseController
         $this->assertCan('BI_普租情报_详情');
 
         $id = $request->input('id', '');
-        if (empty($id)){
+        if (empty($id)) {
             $this->error("参数错误");
         }
 
@@ -118,9 +118,6 @@ class RiskEvaluationController extends BaseController
         } else {
             $this->error("您没有权限");
         }
-        //$info_res = GeneralRentInformationCollection::where('id', '=', $id)->first();
-
-        $info_res = GeneralRentInformationCollection::where('id', '=', $id)->first();
         $logs = FicoLog::where(['related_doc_id' => $id, 'related_doc_type' => '普租情报操作日志'])->get();
         $pic_arr = $this->rentInformationUrls($id);
         $floor_list = $this->floorList();
@@ -196,7 +193,6 @@ class RiskEvaluationController extends BaseController
             flash('操作失败');
             return redirect(action('Admin\BI\RiskEvaluationController@anyIndex'));
         }
-
     }
 
     // 作废
