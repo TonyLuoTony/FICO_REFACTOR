@@ -16,7 +16,7 @@ class RiskEvaluationController extends BaseController
 
     public function anyIndex(Request $request)
     {
-//        $this->assertCan('BI_普租情报_列表');
+        $this->assertCan('BI_普租情报_列表');
         $title = '普租情报列表';
 
         $check_status = $request->input('check_status', '');
@@ -110,16 +110,16 @@ class RiskEvaluationController extends BaseController
         if (empty($id)){
             $this->error("参数错误");
         }
-//        $this->assertCan('BI_普租情报_详情');
-//        if (role('BI-风控-评估师')) {
-//            $info_res = GeneralRentInformationCollection::where('id', '=', $id)->first();
-//        } elseif (role('BI-风控-查看') || role('出房团队')) {
-//            $info_res = GeneralRentInformationCollection::where('id', '=', $id)->where('user_id', '=',
-//                \CorpAuth::id())->first();
-//        } else {
-//            $this->error("您没有权限");
-//        }
-        $info_res = GeneralRentInformationCollection::where('id', '=', $id)->first();
+        $this->assertCan('BI_普租情报_详情');
+        if (role('BI-风控-评估师')) {
+            $info_res = GeneralRentInformationCollection::where('id', '=', $id)->first();
+        } elseif (role('BI-风控-查看') || role('出房团队')) {
+            $info_res = GeneralRentInformationCollection::where('id', '=', $id)->where('user_id', '=',
+                \CorpAuth::id())->first();
+        } else {
+            $this->error("您没有权限");
+        }
+        //$info_res = GeneralRentInformationCollection::where('id', '=', $id)->first();
 
         $info_res = GeneralRentInformationCollection::where('id', '=', $id)->first();
         $logs = FicoLog::where(['related_doc_id' => $id, 'related_doc_type' => '普租情报操作日志'])->get();
