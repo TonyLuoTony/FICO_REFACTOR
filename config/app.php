@@ -39,6 +39,9 @@ return [
     */
 
     'debug' => env('APP_DEBUG', false),
+    'debug_user' => env('DEBUG_USER_ID'),
+    'debug_corp_user' => env('DEBUG_CORP_USER_ID'),
+    'debug_vendor_user' => env('DEBUG_VENDOR_ID'),
 
     /*
     |--------------------------------------------------------------------------

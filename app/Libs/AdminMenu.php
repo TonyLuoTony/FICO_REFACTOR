@@ -20,7 +20,7 @@ class AdminMenu
      */
     private function all()
     {
-        $Encrypter = new Encrypter(env('LAPUTA_API_KEY'),'AES-256-CBC');
+        $Encrypter = new Encrypter(env('LAPUTA_API_KEY'), 'AES-256-CBC');
         $token = $Encrypter->encrypt(env('LAPUTA_API_KEY') . '|' . time());
 
         $client = app(\HttpClient::class);

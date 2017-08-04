@@ -106,7 +106,7 @@ class RiskEvaluationController extends BaseController
         $this->assertCan('BI_普租情报_详情');
 
         $id = $request->input('id', '');
-        if (empty($id)) {
+        if (empty($id)){
             $this->error("参数错误");
         }
 
