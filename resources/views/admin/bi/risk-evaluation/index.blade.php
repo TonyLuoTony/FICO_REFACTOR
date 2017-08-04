@@ -131,7 +131,7 @@
                                 <td>{{$s_val->check_price}}</td>
                                 <td>{{$s_val->area}}</td>
                                 <td>{{$s_val->bedroom_num.'室'.($s_val->bef_gw+$s_val->bef_dw).'卫'}}</td>
-                                <td>{{\CorpUser::find($s_val->user_id)->name}}</td>
+                                <td>{{$s_val->user_id ? \CorpUser::find($s_val->user_id)->name : ''}}</td>
                                 <td>{{$s_val->create_time}}</td>
                                 <td>{{$s_val->checker_id ? \CorpUser::find($s_val->checker_id)->name : ''}}</td>
                                 <td>{{$s_val->check_time}}</td>

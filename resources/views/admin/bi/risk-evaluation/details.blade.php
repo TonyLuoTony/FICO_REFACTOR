@@ -249,7 +249,6 @@
         </div>
     </div>
     <br>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     @js('js/plugins/slimscroll/jquery.slimscroll.min.js')
     <!-- blueimp gallery -->
     @js('js/plugins/blueimp/jquery.blueimp-gallery.min.js')
