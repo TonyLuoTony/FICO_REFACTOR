@@ -29,7 +29,7 @@ class JumpController extends BaseApiController
                 //同步登陆
                 \CorpAuth::login($uid);
 
-                return redirect("admin/payment");
+                return redirect($url);
 
             } else {
                 abort('404', '登陆超时');

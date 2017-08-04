@@ -131,6 +131,7 @@ trait CorpUserACLTrait
 
     private function noticeDev($subject)
     {
-        return \Email::send('dev@dankegongyu.com', $subject, date('c'));
+        return true;
+        //return \Email::send('dev@dankegongyu.com', $subject, date('c'));
     }
 }
