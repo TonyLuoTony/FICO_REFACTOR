@@ -62,7 +62,7 @@
                     </div>
                 </li>
 
-                <? $menus = [];//(new AdminMenu())->visibleLinks()?>
+                <? $menus = (new AdminMenu())->visibleLinks()?>
                 @foreach( $menus as $groupName => $group)
                     <li>
                         @if(is_array($group))
