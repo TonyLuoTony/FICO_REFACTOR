@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers\Api;
 
-Use Illuminate\Encryption\Encrypter;
+use Illuminate\Encryption\Encrypter;
 use Illuminate\Support\Facades\Redis;
 
 class JumpController extends BaseApiController
