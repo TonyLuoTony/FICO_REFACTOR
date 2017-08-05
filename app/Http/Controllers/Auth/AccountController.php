@@ -51,23 +51,26 @@ class AccountController extends Controller
 
     public function payment()
     {
-        $menus = (new AdminMenu())->visibleLinks();
-        echo '<pre>';
-        print_r($menus);
-        echo '</pre>';
-        exit;
+//        $menus = (new AdminMenu())->visibleLinks();
+//        echo '<pre>';
+//        print_r($menus);
+//        echo '</pre>';
+//        exit;
 
-        echo 'payment';
+        //echo 'payment';
+        return view('admin.landlord.repairing');
     }
 
     public function customer()
     {
-        echo 'customer';
+        //echo 'customer';
+        return view('admin.landlord.repairing');
     }
 
     public function landlord()
     {
-        echo 'landlord';
+        //echo 'landlord';
+        return view('admin.landlord.repairing');
     }
 
 }
