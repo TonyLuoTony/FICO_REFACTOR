@@ -6,7 +6,6 @@
             vertical-align: middle !important;
         }
     </style>
-    <link rel="stylesheet" href="{{ asset('styles/login.css') }}">
     @css('css/plugins/blueimp/css/blueimp-gallery.min.css')
     @css('css/animate.css')
 @endsection
